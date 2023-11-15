@@ -3,10 +3,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Game } from '../../games/entities/game.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -19,6 +21,9 @@ export class User extends BaseEntity {
   @Column()
   @Exclude({ toPlainOnly: true })
   password: string;
+
+  @OneToMany(() => Game, (game) => game.user)
+  games: Game[];
 
   @CreateDateColumn()
   createdAt: Date;

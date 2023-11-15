@@ -21,7 +21,6 @@ export class ProvidersService implements OnModuleInit {
 
   async onModuleInit() {
     await this.seed();
-    await this.fetchAllGBFSProviders();
   }
 
   @Cron(CronExpression.EVERY_HOUR)
@@ -136,5 +135,7 @@ export class ProvidersService implements OnModuleInit {
         'https://stables.donkey.bike/api/public/gbfs/2/donkey_utrechtse_heuvelrug/gbfs.json',
       ],
     });
+
+    await this.fetchAllGBFSProviders();
   }
 }

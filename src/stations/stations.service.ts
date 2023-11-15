@@ -15,10 +15,13 @@ export class StationsService {
     return this.repository.upsert(dto, ['externalId', 'provider']);
   }
 
-  async findAll() {
-    return this.repository.find({
-      relations: ['provider'],
-      take: 5,
-    });
+  async findAll(count: number) {
+    return await this.repository
+      .createQueryBuilder('station')
+      .addSelect('RANDOM()', 'seeded_random')
+      .leftJoinAndSelect('station.provider', 'provider')
+      .orderBy('seeded_random')
+      .take(count)
+      .getMany();
   }
 }

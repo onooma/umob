@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { StationsModule } from './stations/stations.module';
 import { ProvidersModule } from './providers/providers.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { GamesModule } from './games/games.module';
+import { QuestionsModule } from './questions/questions.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { ScheduleModule } from '@nestjs/schedule';
     AuthModule,
     StationsModule,
     ProvidersModule,
+    GamesModule,
+    QuestionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
