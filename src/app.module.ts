@@ -5,6 +5,9 @@ import * as process from 'process';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { StationsModule } from './stations/stations.module';
+import { ProvidersModule } from './providers/providers.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -19,8 +22,11 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       logging: true,
     }),
+    ScheduleModule.forRoot(),
     UsersModule,
     AuthModule,
+    StationsModule,
+    ProvidersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
