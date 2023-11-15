@@ -12,6 +12,13 @@ resource "aws_alb" "lb" {
 
 resource "aws_security_group" "lb" {
   ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = 443 # Allowing traffic in from port 80
     to_port     = 443
     protocol    = "tcp"
