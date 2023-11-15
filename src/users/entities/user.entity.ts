@@ -1,17 +1,10 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Game } from '../../games/entities/game.entity';
+import { AppEntity } from '../../utils/AppEntity';
 
 @Entity()
-export class User extends BaseEntity {
+export class User extends AppEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,10 +17,4 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Game, (game) => game.user)
   games: Game[];
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

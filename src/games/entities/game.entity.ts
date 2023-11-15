@@ -1,19 +1,17 @@
 import {
-  BaseEntity,
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Question } from '../../questions/entities/question.entity';
 import { GameStatusEnum } from '../game-status.enum';
+import { AppEntity } from '../../utils/AppEntity';
 
 @Entity()
-export class Game extends BaseEntity {
+export class Game extends AppEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -26,12 +24,9 @@ export class Game extends BaseEntity {
   @Column({ default: 0 })
   score: number;
 
+  @Column({ default: 10 })
+  questionCount: number;
+
   @Column({ default: GameStatusEnum.created })
   status: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

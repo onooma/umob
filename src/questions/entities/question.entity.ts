@@ -1,17 +1,10 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Game } from '../../games/entities/game.entity';
 import { Exclude } from 'class-transformer';
+import { AppEntity } from '../../utils/AppEntity';
 
 @Entity()
-export class Question extends BaseEntity {
+export class Question extends AppEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -33,10 +26,4 @@ export class Question extends BaseEntity {
 
   @ManyToOne(() => Game, (game) => game.questions)
   game: Game;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

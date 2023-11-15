@@ -1,18 +1,16 @@
 import {
-  BaseEntity,
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
   Unique,
-  UpdateDateColumn,
 } from 'typeorm';
 import { Provider } from '../../providers/entities/provider.entity';
+import { AppEntity } from '../../utils/AppEntity';
 
 @Entity()
 @Unique('unique_provider_and_id', ['externalId', 'provider'])
-export class Station extends BaseEntity {
+export class Station extends AppEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,10 +25,4 @@ export class Station extends BaseEntity {
 
   @ManyToOne(() => Provider, (provider) => provider.stations)
   provider: Provider;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }
