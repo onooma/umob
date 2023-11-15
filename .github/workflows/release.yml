@@ -3,17 +3,19 @@ name: Release
 on:
   push:
     branches: [ main ]
-  workflow_run:
-    workflows: [ e2e-test ]
-    types: [ completed ]
 
 env:
   AWS_REGION: eu-central-1
   ECR_REPOSITORY: umob-ecr-repo
 
 jobs:
+  test:
+    name: Test
+    uses: ./.github/workflows/e2e-test.yml
+
   deploy:
     name: Deploy
+    needs: [ test ]
     runs-on: ubuntu-latest
     environment: production
 
