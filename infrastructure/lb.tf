@@ -26,7 +26,6 @@ resource "aws_security_group" "lb" {
   }
 }
 
-
 resource "aws_lb_target_group" "lb" {
   name        = join("-", [module.umob_label.id, "api"])
   port        = 3000
@@ -35,7 +34,7 @@ resource "aws_lb_target_group" "lb" {
   vpc_id      = aws_default_vpc.default_vpc.id
   health_check {
     matcher             = "200,301,302"
-    path                = "/"
+    path                = "/api/ping"
     interval            = 60
     unhealthy_threshold = 5
   }
