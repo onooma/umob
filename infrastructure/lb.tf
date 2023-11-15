@@ -53,6 +53,21 @@ resource "aws_lb_listener" "listener" {
   }
 }
 
+resource "aws_alb_listener" "lb_redirect" {
+  load_balancer_arn = aws_alb.lb.arn
+  port              = 80
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
 resource "aws_default_subnet" "default_subnet_a" {
   availability_zone = "eu-central-1a"
 }
